@@ -1,11 +1,10 @@
+import 'package:knowuc/utils/utils.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:knowuc/animations/entranceFader.dart';
-import 'package:knowuc/utils/utils.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:knowuc/pages/nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   ScrollController _scrollController =
       ScrollController(initialScrollOffset: 25.0);
   ItemScrollController _itemScrollController = ItemScrollController();
-  ItemPositionsListener _itemPositionsListener = ItemPositionsListener.create();
+  ItemPositionsListener _itemPositionListener = ItemPositionsListener.create();
 
   final List<String> _sectionsName = [
     "Home",
@@ -40,7 +39,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget sectionWidget(int i) {
-    if (i == 0) return HomePage();
+    if (i == 0)
+      return HomePage();
+    else
+      return Container();
   }
 
   @override
@@ -63,9 +65,9 @@ class _HomePageState extends State<HomePage> {
           thumbColor: primarycolor1,
           thickness: 5.0,
           child: ScrollablePositionedList.builder(
-            itemCount: 8,
             itemScrollController: _itemScrollController,
-            itemPositionsListener: _itemPositionsListener,
+            itemPositionsListener: _itemPositionListener,
+            itemCount: 8,
             itemBuilder: (context, index) {
               return sectionWidget(index);
             },
@@ -96,16 +98,15 @@ class _HomePageState extends State<HomePage> {
         : Padding(
             padding: const EdgeInsets.all(8.0),
             child: MaterialButton(
-              hoverColor: primarycolor1,
-              onPressed: () => _scroll(index),
-              child: ListTile(
-                leading: Icon(
-                  icon,
-                  color: primarycolor1,
-                ),
-                title: Text(childText),
-              ),
-            ),
+                hoverColor: primarycolor1,
+                onPressed: () => _scroll(index),
+                child: ListTile(
+                  leading: Icon(
+                    icon,
+                    color: primarycolor1,
+                  ),
+                  title: Text(childText),
+                )),
           );
   }
 
@@ -139,12 +140,11 @@ class _HomePageState extends State<HomePage> {
             child: MaterialButton(
               hoverColor: primarycolor1.withAlpha(150),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                side: BorderSide(color: primarycolor1),
-              ),
+                  borderRadius: BorderRadius.circular(5.0),
+                  side: BorderSide(color: primarycolor1)),
               onPressed: () {
                 html.window.open(
-                    'https://drive.google.com/file/d/119xfvbeUcKGO9BrpAH-i_HgsBzDW4ehr/view?usp=sharing',
+                    'https://drive.google.com/uc?export=view&id=1OOdcdGEN3thVvpZ4cl_MM0LT-GCMuLIE',
                     "pdf");
               },
               child: Text(
@@ -155,10 +155,53 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
 
-  Widget _appBarMobile() {}
+  Widget _appBarMobile() {
+    return Drawer(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 25.0, 0, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: NavBarLogo(
+                height: 28,
+              ),
+            ),
+            for (int i = 0; i < _sectionsName.length; i++)
+              _appBarActions(_sectionsName[i], i, _sectionsIcons[i]),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: MaterialButton(
+                hoverColor: primarycolor1.withAlpha(150),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    side: BorderSide(color: primarycolor1)),
+                onPressed: () {
+                  launchURL(
+                      "https://drive.google.com/uc?export=view&id=1OOdcdGEN3thVvpZ4cl_MM0LT-GCMuLIE");
+                },
+                child: ListTile(
+                  leading: Icon(
+                    Icons.book,
+                    color: Colors.red,
+                  ),
+                  title: Text(
+                    "Resume",
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.w200,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
