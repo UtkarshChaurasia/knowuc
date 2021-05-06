@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:knowuc/utils/utils.dart';
-import 'package:knowuc/pages/home_page.dart';
+import 'package:knowuc/pages/mainsection.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         accentColor: primarycolor1,
         highlightColor: primarycolor1,
       ),
-      home: HomePage(),
+      home: MainPage(),
     );
   }
 }
