@@ -80,13 +80,7 @@ final servicesDescriptions = [
   "I have been writing technical blogs on Medium for over a year now. So, I can get you technical blogs with awesome header images, interesting topics and SEO friendly.\nCheck out my Medium profile @utkarsh103b",
 ];
 
-final servicesLinks = [
-  "https://www.fiverr.com/hamza6shakeel/be-your-mobile-app-developer-via-flutter",
-  "https://www.fiverr.com/hamza6shakeel/get-you-modern-ui-design-using-adobe-xd",
-  "https://www.fiverr.com/hamza6shakeel/be-your-mobile-app-developer-via-flutter",
-  "https://mhamzadev.medium.com",
-  "https://github.com/m-hamzashakeel"
-];
+final servicesLinks = ["", "", "", "", ""];
 
 final codingTitles = [
   "Codeforces",
